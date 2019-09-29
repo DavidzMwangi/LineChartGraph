@@ -67,6 +67,7 @@ public class MainActivity extends DemoBase implements SeekBar.OnSeekBarChangeLis
             chart.setOnChartValueSelectedListener(this);
             chart.setDrawGridBackground(false);
 
+
             // create marker to display box when values are selected
             MyMarkerView mv = new MyMarkerView(this, R.layout.custom_marker_view);
 
@@ -77,12 +78,13 @@ public class MainActivity extends DemoBase implements SeekBar.OnSeekBarChangeLis
             // enable scaling and dragging
             chart.setDragEnabled(true);
             chart.setScaleEnabled(true);
-            // chart.setScaleXEnabled(true);
+             chart.setScaleXEnabled(true);
             // chart.setScaleYEnabled(true);
 
             // force pinch zoom along both axis
             chart.setPinchZoom(true);
         }
+
 
         XAxis xAxis;
         {   // // X-Axis Style // //
@@ -148,6 +150,8 @@ public class MainActivity extends DemoBase implements SeekBar.OnSeekBarChangeLis
         // draw points over time
         chart.animateX(1500);
 
+        //set the max visible at a single instance
+        chart.setVisibleXRangeMaximum(10);
         // get the legend (only possible after setting data)
         Legend l = chart.getLegend();
 
@@ -192,12 +196,14 @@ public class MainActivity extends DemoBase implements SeekBar.OnSeekBarChangeLis
 
     private void setData(int count, float range) {
 
+        //TODO get the data entered from this point
         ArrayList<Entry> values = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {
 
             float val = (float) (Math.random() * range) - 30;
             values.add(new Entry(i, val, getResources().getDrawable(R.drawable.star)));
+            Log.e("data_data",val+"  range "+range );
         }
 
         LineDataSet set1;
